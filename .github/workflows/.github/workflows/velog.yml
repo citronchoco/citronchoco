@@ -1,0 +1,20 @@
+name: Latest Velog Posts
+
+on:
+  schedule:
+    # 매일 자정(UTC 기준)에 자동으로 실행되도록 설정
+    - cron: '0 0 * * *'
+  workflow_dispatch: # 수동으로 업데이트 버튼을 누를 수 있게 해주는 옵션
+
+jobs:
+  update-readme-with-blog:
+    name: Update this repo's README with latest blog posts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Pull in velog posts
+        uses: gautamkrishnar/blog-post-workflow@master
+        with:
+          # 👇 아래 주소의 '본인아이디' 부분을 실제 네 벨로그 아이디로 꼭 바꿔줘! (@ 기호는 냅둬야 됨)
+          feed_list: "https://v2.velog.io/rss/@halfgene"
